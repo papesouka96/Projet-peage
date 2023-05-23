@@ -1,0 +1,51 @@
+
+[
+    {
+    "date":"2023-03-11",
+    "temperature":"30",
+    "humidite_sol": "50",
+    "humidite_serre": "51"
+
+},
+{
+    "date":"2023-03-12",
+    "temperature":"25",
+    "humidite_sol": "40",
+    "humidite_serre": "52"
+
+},
+{
+    "date":"2023-03-13",
+    "temperature":"32",
+    "humidite_sol": "70",
+    "humidite_serre": "50"
+
+},
+{
+    "date":"2023-03-14",
+    "temperature":"27",
+    "humidite_sol": "60",
+    "humidite_serre": "61"
+
+},
+{
+    "date":"2023-03-15",
+    "temperature":"30",
+    "humidite_sol": "40",
+    "humidite_serre": "50"
+
+},   {
+    "date":"2023-03-16",
+    "temperature":"30",
+    "humidite_sol": "75",
+    "humidite_serre": "45"
+
+},
+{
+    "date":"2023-03-16",
+    "temperature":"31",
+    "humidite_sol": "71",
+    "humidite_serre": "65"
+
+}
+]

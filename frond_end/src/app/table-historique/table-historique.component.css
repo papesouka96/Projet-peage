@@ -1,0 +1,12 @@
+.pagination::ng-deep .ngx-pagination .current{
+    background-color: #287481;
+ }
+
+ .form-inline{
+ 
+    margin-left: 1000px;
+ }
+ .table{
+border:solid black 3px;
+border-radius: 20px;
+ }

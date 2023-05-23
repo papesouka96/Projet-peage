@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body class="bg-light">
+
+  
+    <div class="container justify-content-between custom-line bg-light" >
+    
+       <!--  affichage de la temperature actuelle -->
+      <div class="card d-flex align-items-center" style="width: 300px; height: 345px;">
+          
+        <div class="card-body " >
+            <div *ngIf="barriereb" ><img  style="width: 250px ;" src="../../assets/Capture d’écran du 2023-05-09 22-34-48.png" alt=""></div>
+            <div *ngIf="barrierel"> <img  style="width: 250px ;" src="../../assets/Capture d’écran du 2023-05-09 22-35-25.png" alt=""></div>
+            <div class="d-flex justify-content-center mt-3 ">
+              <button class="btn btn-outline-primary" *ngIf="barriereb"(click)="leveb()" >Lever barriere</button>
+              <button class="btn btn-outline-primary" *ngIf="barrierel" (click)="baisseb()">Baisser barriere</button>
+            </div>
+        </div>
+      </div>
+    
+    
+       
+       
+      <!--  affichage temperature moyenene -->
+        <div class="card d-flex align-items-center" style="width: 900px; height: 345px;">
+          
+          <div class="card-body  " >
+              
+           <app-ajout-abonne></app-ajout-abonne>
+           
+          </div>
+        </div>
+    
+    </div>
+    
+    <!-- Affichage des trois Temperatures et Humidités  -->
+    <div class="container justify-content-between custom-line bg-light">
+     
+        <div class="card d-flex" style="width: 900px; height: 500px; border-color: #4654D4;">
+          <button type="button"style="width: 30px; height: 30px; justif " *ngIf="annulerb" (click)="annuler()" class="d-flex  close bg-danger "aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div style="border: none;" class="card d-flex align-items-center   ">
+       <button style="width: 500px; height: 100px; margin-top: 100px;" class ="btn btn-primary btn-sm mt-6  d-flex justify-content-center" (click)="payement()" *ngIf="payerb"> Payement</button>
+          <button style="width: 500px; height: 100px;" class ="btn btn-secondary btn-sm  mt-5  d-flex justify-content-center"(click)="rechargement() " *ngIf="chargerb"> Rechargement Carte</button>
+          <h3 class="mt-5 mb-3 pb-1 text-center"*ngIf="payer" >PAYEMENT</h3> <br>
+          <h3 class="mt-5 mb-3 pb-1 text-center" *ngIf="charger">RECHARGEMENT</h3> <br>
+          <form id="form" 
+
+          class="row d-flex justify-content-center no-wrap  "  *ngIf="payer" (submit)="onSubmit()" [formGroup]="registerForm2">
+     
+          
+          <div *ngIf="errorSms!" class="d-flex justify-content-center text text-danger" id="">
+            <span>email deja existe!</span>
+          </div>
+
+          <div class="input-control col-md-5 ">
+            <label class="form-label" for="form2Example11">matricule</label><span style="color: red;">*</span>
+            <input id="matricule" name="matricule" class=" rounded-0" type="text"
+              [ngClass]="{'is-invalid':submitted && registerForm2.controls['matricule'].errors}" placeholder="matricule"
+              formControlName="matricule" type="text" class="form-control" id="matricule" name="matricule">
+            <div *ngIf="registerForm2.controls['matricule'].dirty && registerForm2.controls['matricule'].errors"
+              class="text-danger">
+              <div *ngIf="registerForm2.controls['matricule'].errors ['required']">
+                Ce champ est requis
+              </div>
+           
+            </div>
+          </div>
+
+          <div class="input-control col-md-5">
+            <label class="form-label" for="form2Example11">Categorie</label><span style="color: red;">*</span>
+            <select id="form2Example11" name="Categorie" class="form-select p-3 rounded-0"
+              [ngClass]="{'is-invalid':submitted && registerForm2.controls['categorie'].errors}" placeholder="categorie"
+              id="categorie" formControlName="categorie" type="text" class="form-control" placeholder="categorie">
+              <option value=""></option>
+              <option value="PoidsL">PoidsL</option>
+              <option value="Transport">Transport</option>
+              <option value="Particulier">Particulier</option>
+            </select>
+            <div *ngIf="registerForm2.controls['categorie'].dirty && registerForm2.controls['categorie'].errors"
+              class="text-danger">
+              <div *ngIf="registerForm2.controls['categorie'].errors ['required']">
+                Ce champ est requis
+              </div>
+            <!--   <div *ngIf="registerForm2.controls['categorie'].errors['categorie']">
+                role is not Valid
+
+              </div> -->
+            </div>
+          </div>
+
+         <!--  <div class="input-control col-md-5 mt-3">
+            <label class="form-label" for="form2Example11">Montant</label><span style="color: red;">*</span>
+            <input id="montant" name="montant" class=" p-3 rounded-0" type="text" placeholder="montant"
+              [ngClass]="{'is-invalid':submitted && registerForm2.controls['montant'].errors}"
+              formControlName="montant" type="text" class="form-control">
+            <div *ngIf="registerForm2.controls['montant'].dirty && registerForm2.controls['montant'].errors"
+              class="text-danger">
+              <div
+                *ngIf="registerForm2.controls['montant'].dirty && registerForm2.controls['montant'].errors['required']">
+                Ce champ est requis
+              </div>
+           
+            </div>
+
+          </div> -->
+
+         <!--  <div class="input-control col-md-6 mt-3">
+            <label class="form-label" for="form2Example11">Poste</label><span
+              style="color: red;">*</span>
+            <input [ngClass]="{'is-invalid':submitted && registerForm2.controls['poste'].errors}"
+              placeholder="N° Poste" formControlName="poste" class=" p-3 rounded-0" type="text"
+              class="form-control" id="poste" >
+            <div *ngIf="registerForm2.controls['poste'].dirty && registerForm2.controls['poste'].errors"
+              class="text-danger">
+            <div *ngIf="registerForm2.controls['poste'].errors required">
+                Ce champ est requis
+              </div>
+            </div>
+          </div> -->
+
+       
+
+          <div class="d-flex align-items-center justify-content-center pb-4 mt-2 mt-5 ">
+            <button type="button" (click)="onSubmit()" id="form2Example11" class="btn btn-outline-primary">
+              <span class="visually"  >Payer</span>
+              <span class="spinner-border spinner-border-sm" *ngIf="spin" role="status" aria-hidden="false"
+                style="color: white;"></span>
+            </button>
+          </div>
+        </form>
+        
+        <form id="form" style="height: 350px;  margin-top: 30px; height: 250px;"
+
+        class="row d-flex justify-content-center no-wrap  "  *ngIf="charger" (submit)="onSubmit()" [formGroup]="registerForm2">
+   
+    
+
+        <div class="input-control col-md-6 mt-3">
+          <label class="form-label" for="form2Example11">N° Carte</label><span
+          
+            style="color: red;">*</span>
+          <input [ngClass]="{'is-invalid':submitted && registerForm1.controls['rfid'].errors}"
+            placeholder="N° Carte" formControlName="rfid" class=" p-3 rounded-0" type="text"
+            class="form-control" id="rfid" >
+          <div *ngIf="registerForm1.controls['rfid'].dirty && registerForm1.controls['rfid'].errors"
+            class="text-danger">
+          <div *ngIf="registerForm1.controls['rfid'].errors required">
+              Ce champ est requis
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="errorSms" class="d-flex justify-content-center text text-danger" id="">
+          <span>Carte non Accepter</span>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-center pb-4 ">
+          <button type="button" (click)="onSubmit()" id="form2Example11" class="btn btn-outline-primary">
+            <span class="visually" >Suivant>></span>
+            <span class="spinner-border spinner-border-sm" *ngIf="spin" role="status" aria-hidden="false"
+              style="color: white;"></span>
+          </button>
+        </div>
+      </form>
+      <div style="width: 700px; gap: 100px;" class=" d-flex table table-bordered rounded-3" *ngIf="tableau">
+  
+     
+        
+       
+          <div   *ngFor="let i of userActif  ">
+            <!-- <th rowspan="3" scope="row" class="text-center">Temperature en °C</th> -->
+          <!--   <div style="font-size: 25px;"> Prenom :    {{i.prenom}}</div> -->
+          <div>
+            <div class="d-flex">
+              <div style="font-size: 20px;"> Prenom :    </div>
+              <div style="margin-left: 15px; font-size: 20px;">
+                {{i.prenom}}
+              </div>
+            </div>
+            <div class="d-flex">
+              <div style="font-size: 20px;" > Nom :    </div>
+              <div style="margin-left: 15px; font-size: 20px;">
+                {{i.nom}}
+              </div>
+            </div>
+            <div class="d-flex">
+              <div style="font-size: 20px;"> Matricule :    </div>
+              <div style="margin-left: 15px; font-size: 20px;">
+                {{i.matricule}}
+              </div>
+            </div>
+            <div class="d-flex">
+              <div style="font-size: 20px;"> Solde: Fcfa   </div>
+              <div style="margin-left: 15px; font-size: 20px;">
+                {{i.solde}}
+              </div>
+            </div>
+            <div class="d-flex">
+              <div style="font-size: 20px;"> categorie :    </div>
+              <div style="margin-left: 15px; font-size: 20px;">
+                {{i.categorie}}
+              </div>
+            </div>
+            <!-- <div style="font-size: 25px;">Nom :        {{i.nom}}</div>
+            <div style="font-size: 25px;">Solde :     {{i.solde}}FCFA</div>
+            <div style="font-size: 25px;"> Matricule :     {{i.matricule}}</div> 
+            <div style="font-size: 25px;"> Categorie :    {{i.categorie}}</div>  -->
+           <!--  <td>{{i.Heure}}</td>  -->
+          </div>
+        </div>
+      <div> <img style="width: 370px; height: 280px;" src="../../assets/images.jpeg" alt=""></div>
+       
+        </div>
+        <div *ngFor="let i of userActif">
+        <form id="form" style="height: 350px;  margin-top: 30px; height: 250px; gap: 250px;"
+
+        class=" d-flex  "  *ngIf="tableau"  [formGroup]="registerForm2">
+   
+      
+
+        <div class="input-control ">
+          <label class="form-label " for="form2Example11">Montant de la Recharge</label><span
+            style="color: red;">*</span>
+          <input [ngClass]="{'is-invalid':submitted && registerForm1.controls['rfid'].errors}"
+            placeholder="Montant" formControlName="montant" class="  rounded-0" type="text"
+            class="form-control" id="montant" >
+          <div *ngIf="registerForm1.controls['rfid'].dirty && registerForm1.controls['rfid'].errors"
+            class="text-danger">
+          <div *ngIf="registerForm1.controls['rfid'].errors required">
+              Ce champ est requis
+            </div>
+          </div>
+        </div>
+
+     
+
+        <div class="mt-4"   >
+          <button type="button" (click)="changesolde( )" id="form2Example11" class="btn btn-outline-primary">
+            Recharger
+          
+          </button>
+        </div>
+      </form>
+    </div>
+    </div>
+          </div> 
+        
+       
+        
+          <div class="card d-flex align-items-center" style="width: 350px;">
+            <div class="" >
+                <img style="width: 350px; height: 456px;" class="mt-0"
+                src="../../assets/poste-peage-autoroute-checkpoint-route_131301-1983.jpg" alt="">
+              </div>
+          </div>
+   </div>
+  </body>
+</html>
