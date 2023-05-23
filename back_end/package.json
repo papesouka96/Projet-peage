@@ -1,0 +1,25 @@
+{
+  "name": "simplonapi",
+  "version": "1.0.0",
+  "description": "api nodejs",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mamy sy",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.8.4",
+    "nodemon": "^2.0.20",
+    "serialport": "^10.5.0",
+    "socket.io": "^4.5.4",
+    "socket.io-client": "^4.6.1"
+  }
+}
